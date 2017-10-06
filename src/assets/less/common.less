@@ -1,0 +1,34 @@
+@import './mixin.less';
+
+/*公用样式*/
+//每个模块的内容盒子边界
+.content-wrapper{
+	position: relative;
+    min-width: 980px;
+    max-width: 1180px;
+	margin: 0 auto;
+	font-size: 0;
+
+	@media screen and (max-width: 1200px){
+		width: 980px;
+	}
+}
+
+.dsn{
+	display: none;
+}
+
+
+.arrow(@px){
+	display: inline-block;
+	font-size: 0;
+	&:after{
+		content: '';
+		display: inline-block;
+		border-top: @px solid red;
+		border-bottom: @px solid transparent;
+		border-right: @px solid transparent;
+		border-left: @px solid transparent;
+
+	}
+}

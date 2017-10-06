@@ -1,0 +1,46 @@
+/*
+less-mixin tips
+1.在参数可以使用默认值 @*: * 的方式   使用: 作为标识
+
+*/
+
+//颜色集合
+@service_blue: #06c; 
+@lazy_color: #fff;
+
+// display vertical集合
+#display_type{
+	.dsp-middle{
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.dsp-top{
+		display: inline-block;
+		vertical-align: top;
+	}
+}
+
+// 三角形(向下)
+.arrow_down(@size, @color: black){
+	// display: inline-block;
+	margin-left: 5px;
+	&:after{
+		content: '';
+		display: inline-block;
+		border-top: @size solid @color;
+		border-left: @size solid transparent;
+		border-right: @size solid transparent;
+		border-bottom: @size solid transparent;
+	}
+}
+
+.arrow_up(@size){
+	&:after{
+		content: '';
+		display: inline-block;
+		border-top: @size solid transparent;
+		border-left: @size solid transparent;
+		border-right: @size solid transparent;
+		border-bottom: @size solid #fff;
+	}
+}
