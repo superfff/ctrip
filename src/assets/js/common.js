@@ -61,10 +61,57 @@ Vue.prototype.throttle = throttle;
 
 //公用方法
 var Rxport = {
+	//获取滚动高度,兼容多个浏览器
+	getScrollTop() {  
+        var scrollPos;  
+        if (window.pageYOffset) {  
+        	scrollPos = window.pageYOffset; 
+        }  
+        else if (document.compatMode && document.compatMode != 'BackCompat')  
+        {
+        	scrollPos = document.documentElement.scrollTop; 
+        }  
+        else if (document.body) {
+        	scrollPos = document.body.scrollTop; 
+        }
 
-	common_alert(){
-		alert(1);
+        return scrollPos;   
 	},
+
+	//页面滚动方法
+	page_scroll_to(cur, tar){
+        var during = 10; //持续时间(ms)
+        var times = 20;  //持续次数
+        var i = 1;       //持续标识
+        var s_flag;
+
+        if(cur < tar){
+            var s = (tar - cur) / times; //滚动距离
+            s_flag = setInterval(() => {
+            	//解决兼容性问题(原本使用documentElement即可)
+                document.documentElement.scrollTop = cur + s * i;
+                document.body.scrollTop = cur + s * i;
+                i++;
+
+                if(i>times){
+                    clearInterval(s_flag);
+                }
+            }, during)
+        }
+        else{
+            var s = (cur - tar) / times;
+            s_flag = setInterval(() => {
+            	//解决兼容性问题
+                document.documentElement.scrollTop = cur - s * i;
+                document.body.scrollTop = cur - s * i;
+                i++;
+
+                if(i>times){
+                    clearInterval(s_flag);
+                }
+            }, during)
+        }
+    }
 
 }
 

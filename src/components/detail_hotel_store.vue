@@ -2,14 +2,12 @@
 <template>
     <div class="store-item">
         <!-- <img class="store-item-img" :src="storeDetail.url" :alt="storeDetail.name"> -->
-        <!-- <lazy-component @show="handler"> -->
             <img class="store-item-img" v-lazy="storeDetail.url">
             <div class="store-item-detail">
                 <p class="title">{{storeDetail.name}}</p>
                 <p class="hotel-num">{{storeDetail.num}}家酒店</p>
                 <store-price class="hotel-price" :store-price="storeDetail.price"></store-price>
             </div>
-        <!-- </lazy-component> -->
     </div>
 </template>
 
@@ -25,10 +23,7 @@ export default {
     },
     data(){
         return {
-            // lazy_img: {
-            //     src: this.storeDetail.url,
-            //     loading: 'http://cdn.uehtml.com/201402/1392662587108.gif'
-            // }
+            
         }
     },
     props: {

@@ -46,7 +46,7 @@ export default {
     },
     methods: {
         windowScroll(){
-            this.scroll = document.documentElement.scrollTop;
+            this.scroll = Lib.C.getScrollTop();
         }
     }
 }

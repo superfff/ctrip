@@ -57,8 +57,6 @@ import detailService from './detail_service'
 import detailSkip from './detail_skip'
 
 
-
-
 export default {
     data(){
         return {
@@ -150,7 +148,7 @@ export default {
                     break;
                 }
             }
-            
+
             //当滚动高度超过时
             if((this.scrollNum + inner_h) > this.scroll_data[this.scroll_data.length - 1]){
                 this.active_flag = this.scroll_data.length;
@@ -187,41 +185,11 @@ export default {
     methods: {
         lift_click(index){
             this.lift_flag = index;
-            var cur_top = document.body.scrollTop;
+            var cur_top = Lib.C.getScrollTop();
             //滚动
-            this.scroll_to(cur_top, this.scroll_data[index]);
+            Lib.C.page_scroll_to(cur_top, this.scroll_data[index]);
 
-        },
-        scroll_to(cur, tar){
-            var during = 10; //持续时间(ms)
-            var times = 20; //持续次数
-            var i = 1; //持续标识
-            var s_flag;
-
-            if(cur < tar){
-                var s = (tar - cur) / times; //滚动距离
-                s_flag = setInterval(() => {
-                    document.body.scrollTop = cur + s * i;
-                    i++;
-
-                    if(i>times){
-                        clearInterval(s_flag);
-                    }
-                }, during)
-            }
-            else{
-                var s = (cur - tar) / times;
-                s_flag = setInterval(() => {
-                    document.body.scrollTop = cur - s * i;
-                    i++;
-
-                    if(i>times){
-                        clearInterval(s_flag);
-                    }
-                }, during)
-            }
-        },
-       
+        }
     }
 }
 </script>

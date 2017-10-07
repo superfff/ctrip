@@ -1,65 +1,37 @@
-# vue2.*  (多页面跳转)
+# 仿造携程官网
 
- @[vue2.3.3|webpack2.6.1|less|axios]
+ @[vue2.3.3|webpack2.6.1|less]
 
->- 以前看过有相关朋友share了空的多页面脚手架. 不过down了几个都是webpack1.0或者vue1.0的.
->- 刚好项目需要用到vue. 就在vue-cli的基础上进行了修改
->- 已经有babel直接用es6即可,如果需要修改配置的请到 .babelrc里面修改
->- **并且全局引了JQ(如果不需要或者不喜欢 请到base.conf.js里面修改)**
+>- 刚开始学前端的时候,有一天看到携程官网.就立志说要找一天能copy一份.然后就一直都没落实 - -
+>- 麻麻我终于完成了!!
+>- 感谢同事(佳望哥)提供的阿里云服务器 [携程传送门](http://112.74.190.180/)
 
-## 命令
+###命令
 >国际惯例
 
 - **npm install (or cnpm 其他)** 装依赖包
-- **npm run dev** 起服务
+- **npm run dev** 起服务 (页面为 localhost:8080/module/home.html 需要加上后缀)
 - **npm run build** 打上线包
-- 跑起来服务后,需要在url输入 /module/*.html (*为对应文件夹名字)
-- 添加了新文件夹后,需要重新 npm run dev一下
 
 ---
 
-##目录结构
+###目录结构
 1. build/config: 一系列配置文件
 2. src: 页面文件
 3. (src)assets: 
 - js公用的方法/配置方法
 - less公用的样式和reset.css
-- lib.js页面引用的入口
+- lib.js 引用的公共入口
 4. (src)components: 复用的组件
-5. (src)module: **相关的页面** (每个文件夹表示一个页面)
-- app.vue (页面)
-- *.html (页面的入口,需要和文件夹名称一致)
-- *.js (页面的js入口,需要和文件夹名称一致)
-- **在static文件夹中的tpl有模板直接复制就ok**
+5. (src)module: **相关的页面** 
+- *.vue(具体页面)
+- 文件夹中的html和js为页面的对应入口配置
+
 
 ---
 
-##其他
-- 在assets/conf.js中配置了axios请求拦截.已经全局引入axios(使用this.$axios进行请求)
-有需要的话.具体的配置请到conf.js中进行增加
-- 端口号在config/index.js中修改;
-- 还有另外一个开发过程中需要挂代理:
-请到config文件夹中的 index.js中 proxyTable进行修改
-具体请参考此 [github链接](https://github.com/chimurai/http-proxy-middleware)
-``` javascript
-/*
-param:
-*:   表示挂代理时,识别的请求前缀
-url: 表示代理的地址
-*/
-'/*': {
-	target: 'url',
-	changeOrigin: true,
-	pathRewrite: {
-		'^/*': '/*'
-	}
-}
-```
-- 本人也还正在学习中,其中有部分vue-cli生成的语句暂时还不太明白,希望能帮到有需要的或者不给大家挖坑.互相学习
-
----
-
-- 想请教一下.如果在js中 import css或者less 页面中是直接在head里面引入style 
-但是我想要使用extract-text-webpack-plugin进行打包 和vue页面的样式放在一起
-在webpack的base.conf.js中module需要如何写,我直接写就报错了?
-难道是import的样式需要和vue的分开么?
+###其他
+- 将主页的每一个部分都拆分为单独的组件进行控制,进行引入/并且将重复的部分抽取出来
+- 手写了debounce/throttle函数作为scroll事件的优化, 在公共方法中用Vue.prototype.*的方式进行集成.使实例可以 this.*进行调用
+- 引用了vue-lazyload作为图片的懒加载组件
+- 没有其他了.就是慢慢搭页面.谢谢大家
